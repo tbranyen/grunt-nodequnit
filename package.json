@@ -1,0 +1,33 @@
+{
+  "name": "grunt-nodequnit",
+  "description": "Run QUnit tests in the Node.js environment.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/tbranyen/grunt-nodequnit",
+  "author": {
+    "name": "Tim Branyen",
+    "url": "http://tbranyen.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tbranyen/grunt-nodequnit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gruntjs/grunt-nodequnit/issues"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/tbranyen/grunt-nodequnit/blob/master/LICENSE"
+  }],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "qunit": "~0.5.13"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt": "~0.4.0"
+  },
+  "keywords": ["grunt", "gruntplugin"]
+}
