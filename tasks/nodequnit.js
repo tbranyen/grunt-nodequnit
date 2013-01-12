@@ -79,9 +79,7 @@ module.exports = function(grunt) {
     };
 
     // Process each filepath in-order.
-    options.tests = this.file.srcRaw.map(function(file) {
-      return path.resolve(options.testsDir, file);
-    });
+    options.tests = this.files[0].src;
 
     // Display a friendly label.
     grunt.verbose.subhead("Testing " + label).or.write("Testing " + label);
