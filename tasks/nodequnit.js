@@ -119,7 +119,7 @@ module.exports = function(grunt) {
     qunit.run(options, function(err, result) {
       if (err) {
         // If there was an error, abort the series.
-        return done();
+        return done(false);
       }
 
       // Log results.
@@ -132,13 +132,14 @@ module.exports = function(grunt) {
         grunt.warn(result.failed + "/" + result.assertions +
           " assertions failed (" + result.runtime + "ms)", Math.min(99, 90 +
             result.failed));
-      } else {
-        grunt.log.ok(result.passed + " assertions passed (" + result.runtime +
-          "ms)");
-      }
 
-      // All done!
-      done();
+        return done(false);
+      }
+      grunt.log.ok(result.passed + " assertions passed (" + result.runtime +
+        "ms)");
+
+      // Success!
+      return done();
     });
   });
 
