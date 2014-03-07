@@ -1,7 +1,7 @@
 {
   "name": "grunt-nodequnit",
   "description": "Run QUnit tests in the Node.js environment.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/tbranyen/grunt-nodequnit",
   "author": {
     "name": "Tim Branyen",
@@ -23,11 +23,11 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "qunit": "~0.5.16"
+    "qunit": "^0.6.1"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt": "~0.4.1"
+    "grunt-contrib-jshint": "^0.8.0",
+    "grunt": "^0.4.2"
   },
   "keywords": ["grunt", "gruntplugin"]
 }
