@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       label: 'node.js',
     });
 
-    var label = options.label;
+    var label = 'Testing ' + options.label;
 
     // This task is asynchronous.
     var done = this.async();
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
     options.tests = this.files[0].src;
 
     // Display a friendly label.
-    grunt.verbose.subhead('Testing ' + label).or.write('Testing ' + label);
+    grunt.verbose.subhead(label).or.writeln(label);
 
     // Start Node QUnit.
     grunt.event.emit('nodequnit.spawn', options);
@@ -118,6 +118,7 @@ module.exports = function(grunt) {
     qunit.run(options, function(err, result) {
       if (err) {
         // If there was an error, abort the series.
+        grunt.log.error(err);
         return done(false);
       }
 
