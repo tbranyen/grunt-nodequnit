@@ -9,20 +9,17 @@
  * Licensed under the MIT license.
  */
 
-"use strict";
+'use strict';
 
 module.exports = function(grunt) {
 
   // Nodejs libs.
-  var path = require("path");
+  var path = require('path');
 
   // For running QUnit in Node.js.
-  var qunit = require("qunit");
+  var qunit = require('qunit');
 
-  // Shorthand.
-  var taskDescription = "Run QUnit tests in the Node.js environment.";
-
-  grunt.registerMultiTask("nodequnit", taskDescription, function() {
+  grunt.registerMultiTask('nodequnit', 'Run QUnit tests in the Node.js environment.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       // Default PhantomJS timeout.
@@ -36,15 +33,17 @@ module.exports = function(grunt) {
         globalSummary: false,
         testing: false,
       },
+      // Code Coverage via Istanbul.
+      coverage: false,
       // Injectable dependencies.
       deps: [],
       // Where the code is located, default to current directory.
-      code: ".",
+      code: '.',
       // Label.
-      label: "node.js",
+      label: 'node.js',
     });
 
-    var label = options.label;
+    var label = 'Testing ' + options.label;
 
     // This task is asynchronous.
     var done = this.async();
@@ -66,7 +65,7 @@ module.exports = function(grunt) {
     var logFailedAssertions = function() {
       var assertion;
       // Print each assertion error.
-      while (assertion = failedAssertions.shift()) {
+      while ((assertion = failedAssertions.shift())) {
         // Print each assertion error.
         grunt.verbose.or.error(assertion.test);
         grunt.log.error('Message: ' + formatMessage(assertion.message));
@@ -82,10 +81,10 @@ module.exports = function(grunt) {
     options.tests = this.files[0].src;
 
     // Display a friendly label.
-    grunt.verbose.subhead("Testing " + label).or.write("Testing " + label);
+    grunt.verbose.subhead(label).or.writeln(label);
 
     // Start Node QUnit.
-    grunt.event.emit("nodequnit.spawn", options);
+    grunt.event.emit('nodequnit.spawn', options);
 
     qunit.log.assertion = function(assertion) {
       if (!assertion.result) {
@@ -119,6 +118,7 @@ module.exports = function(grunt) {
     qunit.run(options, function(err, result) {
       if (err) {
         // If there was an error, abort the series.
+        grunt.log.error(err);
         return done(false);
       }
 
@@ -129,18 +129,17 @@ module.exports = function(grunt) {
         // Log out the failed assertions.
         logFailedAssertions();
 
-        grunt.warn(result.failed + "/" + result.assertions +
-          " assertions failed (" + result.runtime + "ms)", Math.min(99, 90 +
+        grunt.warn(result.failed + '/' + result.assertions +
+          ' assertions failed (' + result.runtime + 'ms)', Math.min(99, 90 +
             result.failed));
 
         return done(false);
       }
-      grunt.log.ok(result.passed + " assertions passed (" + result.runtime +
-        "ms)");
+      grunt.log.ok(result.passed + ' assertions passed (' + result.runtime +
+        'ms)');
 
       // Success!
       return done();
     });
   });
-
 };
